@@ -10,6 +10,12 @@
 
 ### EN DESARROLLO ###
 
+### CREAR REPOSITORIO REMOTO
+
+$git remote add origin git://github.com/paulboone/ticgit.git
+
+
+
 git fetch origin
 git merge origin/master
 
