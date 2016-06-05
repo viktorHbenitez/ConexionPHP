@@ -7,7 +7,7 @@ var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var plumber = require('gulp-plumber');
-var browserSync  = require('browser-sync');
+var browserSync  = require('browser-sync').create();
 var reload = browserSync.reload;
 
 /*var concat = require('gulp-concat');
@@ -55,10 +55,18 @@ gulp.task('html', function(){
 //////  Browser-Sync Task
 ///////////////////////////////
 gulp.task('browser-sync', function(){
-    browserSync({
-        server:{
-          baseDir: "./app"
-        }
+
+    var files = [
+    './style.css',
+    'app/*.php',
+    './*.php',
+    'css/app.css'
+    ];
+
+    browserSync.init(files,{
+       //browser sync para un servidor php necesita proxy, por eso lo usamos aqui
+         proxy: "localhost/CursoPHP/conexionPHP/app",
+         notify: false
       });
   });
 
@@ -71,10 +79,11 @@ gulp.task('watch',function(){
     gulp.watch("scss/**/*.scss", ['sass']);
     gulp.watch("app/**/*.html", ['html']);
     
-}) 
+}).on('change', reload);
 
 ////////////////////////////////
-//////	default Task
+//////  default Task
+    //gulp.watch("app/**/*.php", [reload]);
 ///////////////////////////////
 gulp.task('default', ['scripts', 'sass', 'html', 'browser-sync','watch']);
 
