@@ -65,7 +65,7 @@ gulp.task('browser-sync', function(){
 
     browserSync.init(files,{
        //browser sync para un servidor php necesita proxy, por eso lo usamos aqui
-         proxy: "localhost/CursoPHP/conexionPHP/app",
+         proxy: "localhost:8888/ConexionPHP/app",
          notify: false
       });
   });
